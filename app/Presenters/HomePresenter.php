@@ -9,6 +9,26 @@ use Nette;
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
+protected function createComponentCalculatorForm()
+{
+    $form = new \Nette\Application\UI\Form;
+
+    $form->addText('marze', 'MARŽE');
+    $form->addText('profit', 'Hrubý zisk');
+    $form->addText('reklamy', 'Reklamy');
+    $form->addText('doprava', 'Doprava');
+
+    $form->addSubmit('submit', 'Vypočítat');
+
+    $form->onSuccess[] = [$this, 'calculatorFormSucceeded'];
+
+    return $form;
+}
+public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
+{
+    $marzeValue = $values->profit - ($values->reklamy + $values->doprava);
+    $form['marze']->setValue($marzeValue);
+}
 }
 
 

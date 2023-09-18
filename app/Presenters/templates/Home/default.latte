@@ -1,19 +1,39 @@
-<?php
-$marze = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $profit = isset($_POST['profit']) ? floatval($_POST['profit']) : 0;
-    $reklamy = isset($_POST['reklamy']) ? floatval($_POST['reklamy']) : 0;
-    $doprava = isset($_POST['doprava']) ? floatval($_POST['doprava']) : 0;
-
-    $marze = $profit - ($reklamy + $doprava);
-}
-?>
-
 {block content}
 <div id="banner">
     <h1 n:block=title>Srpen</h1>
 </div>
+
+{control calculatorForm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
 
 <form action="" method="post">
     <label for="marze" class="margin__p">MARŽE</label>
@@ -35,18 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <br>
     <button type="submit" name="submit" value="submit">Vypočítat</button>
 </form>
-
-
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-
 
 
 	<input type="text" name="num1" placeholder="Number 1">
