@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  calc-web:
+    image: dockette/web:php-82
+    volumes:
+      - ./:/srv
+    ports:
+      - 8090:80
+  calc-mysql:
+    restart: always
+    image: mysql
+    user: "root"
+    ports:
+      - "3329:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: calc
+  calc-adminer:
+    restart: always
+    image: adminer:4
+    ports:
+      - "8899:8080"
+    environment:
+      ADMINER_DESIGN: dracula
+      ADMINER_PLUGINS: edit-foreign dump-date tables-filter
