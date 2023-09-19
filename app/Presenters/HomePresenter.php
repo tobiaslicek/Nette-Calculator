@@ -40,23 +40,25 @@ protected function createComponentCalculatorForm()
 
     $form->onSuccess[] = [$this, 'calculatorFormSucceeded'];
 
-    $session = $this->getSession('form');
-
-    if (isset($session->formValues->marze)) {
-        $form['marze']->setValue($session->formValues->marze);
-    }
 
     return $form;
 }
 
 public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
 {
- 
+  \Tracy\Debugger::barDump($values);
     $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (float)$values->doprava);
 
     $this->database->table('values')->insert([
         'marze' => $marzeValue,
+        'profit' => $values->profit,
+        'google' => $values->google,
+        'meta' => $values->meta,
+        'bing' => $values->bing,
+        'sklik' => $values->sklik,
+        'doprava' => $values->doprava
     ]);
+
 
     $form['marze']->setValue($marzeValue);
 
