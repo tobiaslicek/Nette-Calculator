@@ -28,13 +28,13 @@ protected function createComponentCalculatorForm()
 {
     $form = new \Nette\Application\UI\Form;
 
-    $form->addText('marze', 'MARŽE');
-    $form->addText('profit', 'Hrubý zisk');
-    $form->addText('google', 'Google Ads');
-    $form->addText('meta', 'Meta');
-    $form->addText('bing', 'Bing');
-    $form->addText('sklik', 'Sklik');
-    $form->addText('doprava', 'Doprava');
+    $form->addText('marze', 'MARŽE')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('profit', 'Hrubý zisk')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('google', 'Google Ads')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('meta', 'Meta')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('bing', 'Bing')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('sklik', 'Sklik')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('doprava', 'Doprava')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
 
     $form->addSubmit('submit', 'Vypočítat');
 
@@ -56,7 +56,8 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
         'meta' => $values->meta,
         'bing' => $values->bing,
         'sklik' => $values->sklik,
-        'doprava' => $values->doprava
+        'doprava' => $values->doprava,
+        'created_at' =>new \DateTime()
     ]);
 
 
@@ -64,6 +65,7 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
 
     $session = $this->getSession('form');
     $session->formValues = $values;
+
 
     $this->redirect('this');
 }

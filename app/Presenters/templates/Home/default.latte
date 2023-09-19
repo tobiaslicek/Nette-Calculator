@@ -24,14 +24,13 @@
 </div>
 
 	<div n:foreach="$items as $item" class="items">
-		<div class="date">{$item->created_at|date:'F j, Y'}</div>
-		<h2>{$item->marze}</h2>
-		<h2>{$item->profit}</h2>
-		<h2>{$item->google}</h2>
-		<h2>{$item->meta}</h2>
-		<h2>{$item->bing}</h2>
-		<h2>{$item->sklik}</h2>
-		<h2>{$item->doprava}</h2>
-		<h2>{$item->created_at}</h2>
+		<div class="date">{$item->created_at|date:'j.n.Y, 	G:i'}</div>
+		<h2>{$item->marze} Kč</h2>
+		<h2>{$item->profit} Kč</h2>
+		<h2>{$item->google} Kč</h2>
+		<h2>{$item->meta} Kč</h2>
+		<h2>{$item->bing} Kč</h2>
+		<h2>{$item->sklik} Kč</h2>
+		<h2>{$item->doprava} Kč</h2>
 	</div>
 {/block}
