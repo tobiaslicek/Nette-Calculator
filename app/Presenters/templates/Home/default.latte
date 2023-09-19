@@ -6,108 +6,14 @@
 {control calculatorForm}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-
-
-<form action="" method="post">
-    <label for="marze" class="margin__p">MARŽE</label>
-    <input type="text" id="marze" name="marze" placeholder="" value="<?php echo $marze; ?>">
-
-
-    <label for="profit" class="gross-profit">Hrubý zisk</label>
-    <input type="text" id="profit" name="profit" placeholder="">
-
-    <div class="reklamy">
-        <label for="reklamy" class="ads__p"> - Reklamy</label>
-        <input type="text" id="reklamy" name="reklamy">
-    </div>
-
-    <div class="doprava">
-        <label for="doprava" class="carrier__p"> - Doprava</label>
-        <input type="text" id="doprava" name="doprava">
-    </div>
-    <br>
-    <button type="submit" name="submit" value="submit">Vypočítat</button>
-</form>
-
-
-	<input type="text" name="num1" placeholder="Number 1">
-	<input type="text" name="num1" placeholder="Number 1">
-	<select name="operator">
-		<option>None</option>
-		<option>Add</option>
-		<option>Subtract</option>
-		<option>Multiply</option>
-		<option>Divide</option>
-	</select> 
-	<br>
-	<button type="submit" name="submit" value="submit">Calculate</button>
-
-
-<p>The answer is: </p>
-<?php
-	if (isset($_GET['submit'])) {
-			$result1 = $_GET['num1'];
-			$result2 = $_GET['num2'];
-			$operator = $_GET['operator'];
-			switch ($operator) {
-				case "None": 
-					echo "You need to select a method";  
-				break;
-				case "Add": 
-					echo $result1 + $result2;  
-				break;
-				case "Subtract": 
-					echo $result1 - $result2;  
-				break;
-				case "Multiply": 
-					echo $result1 * $result2;   
-				break;
-				case "Divide": 
-					echo echo $result1 / $result2;    
-				break;
-			}
-	}
-?>
-
-<div id="content">
-
-</div>
-
 <style>
-	html { font: normal 18px/1.3 Georgia, "New York CE", utopia, serif; color: #fff; -webkit-text-stroke: 1px rgba(0,0,0,0); overflow-y: scroll; }
-	body { background: #E7EAEF; color: #333; margin: 2em auto; padding: 0 .5em; max-width: 250px; min-width: 140px; max-height: 800px; min-height: 600px}
+	html { font: normal 20px/1.3 'Inter', sans-serif; background: #E7EAEF; color: #000000; -webkit-text-stroke: 1px rgba(0,0,0,0); overflow-y: scroll; }
+	body { background: #D9D9D9; color: #000000; margin: 2em auto; padding: 0 .5em; max-width: 250px; min-width: 140px; max-height: 800px; min-height: 600px}
 
 	a { color: #006aeb; padding: 3px 1px; }
 	a:hover, a:active, a:focus { background-color: #006aeb; text-decoration: none; color: white; }
 
-	#banner { border-radius: 12px 12px 0 0; background-color: #217074; max-height: 80px; min-height: 25px; max-width: 250px; min-width: 140px}
+	#banner { border-radius: 12px 12px 0 0; background-color: #354733; max-height: 80px; min-height: 25px; max-width: 250px; min-width: 140px}
 
 	h1 { font: inherit; color: white; font-size: 35px; line-height: 121px; margin: 0; padding-left: 4%; margin-left: auto; margin-right: auto; margin-top: 50px}
 	@media (max-width: 600px) {
