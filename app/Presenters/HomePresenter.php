@@ -70,3 +70,15 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
 }
 
 }
+
+
+/*
+
+
+
+
+
+
+
+*/
+
