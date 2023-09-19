@@ -25,10 +25,10 @@
 <br><br><br>
 </div>
 
-	<div n:foreach="$items as $item" class="items">
-		<div class="date">{$item->created_at|date:'j.n.Y, 	G:i'}</div>
-        <table>
+	<div>
+        <table class="table">
             <tr>
+                <th>Datum</th>
                 <th>Marze</th>
                 <th>Profit</th>
                 <th>Google</th>
@@ -37,7 +37,8 @@
                 <th>Sklik</th>
                 <th>Doprava</th>
             </tr>
-            <tr>
+            <tr n:foreach="$items as $item" class="items">
+                <td>{$item->created_at|date:'j.n.Y, 	G:i'} </td>
                 <td>{$item->marze} Kč</td>
                 <td>{$item->profit} Kč</td>
                 <td>{$item->google} Kč</td>

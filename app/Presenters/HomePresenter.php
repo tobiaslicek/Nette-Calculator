@@ -21,7 +21,7 @@ public function renderDefault(): void
 	$this->template->items = $this->database
 		->table('values')
 		->order('created_at DESC')
-		->limit(5)->fetchAll();
+		->limit(15)->fetchAll();
 }
     
 protected function createComponentCalculatorForm()
