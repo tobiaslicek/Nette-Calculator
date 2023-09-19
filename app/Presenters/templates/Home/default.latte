@@ -19,18 +19,35 @@
 {input sklik class=>"form-control"}
 {label doprava/}
 {input doprava class=>"form-control"}
+<br><br>
 {input submit class=>"form-control"}
 {/form}
+<br><br><br>
 </div>
 
 	<div n:foreach="$items as $item" class="items">
 		<div class="date">{$item->created_at|date:'j.n.Y, 	G:i'}</div>
-		<h2>{$item->marze} Kč</h2>
-		<h2>{$item->profit} Kč</h2>
-		<h2>{$item->google} Kč</h2>
-		<h2>{$item->meta} Kč</h2>
-		<h2>{$item->bing} Kč</h2>
-		<h2>{$item->sklik} Kč</h2>
-		<h2>{$item->doprava} Kč</h2>
+        <table>
+            <tr>
+                <th>Marze</th>
+                <th>Profit</th>
+                <th>Google</th>
+                <th>Meta</th>
+                <th>Bing</th>
+                <th>Sklik</th>
+                <th>Doprava</th>
+            </tr>
+            <tr>
+                <td>{$item->marze} Kč</td>
+                <td>{$item->profit} Kč</td>
+                <td>{$item->google} Kč</td>
+                <td>{$item->meta} Kč</td>
+                <td>{$item->bing} Kč</td>
+                <td>{$item->sklik} Kč</td>
+                <td>{$item->doprava} Kč</td>
+            </tr>
+        </table>
+        <br>
 	</div>
+
 {/block}

@@ -36,6 +36,7 @@ protected function createComponentCalculatorForm()
     $form->addText('sklik', 'Sklik')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
     $form->addText('doprava', 'Doprava')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
 
+    
     $form->addSubmit('submit', 'Vypočítat');
 
     $form->onSuccess[] = [$this, 'calculatorFormSucceeded'];
