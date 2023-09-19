@@ -12,7 +12,7 @@ body {
   padding: 0 0.5em;
   max-width: 250px;
   min-width: 140px;
-  max-height: 800px;
+  max-height: 2800px;
   min-height: 600px;
 }
 
@@ -80,3 +80,8 @@ img {
   float: right;
   margin: 0 0 1em 3em;
 }
+
+.form-control {
+  width: 50px;
+}
+

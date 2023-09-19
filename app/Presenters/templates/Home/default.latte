@@ -3,6 +3,34 @@
     <h1 n:block=title>Srpen</h1>
 </div>
 
-{control calculatorForm}
+<div class="container">
+{form calculatorForm}
+{label marze/}
+{input marze class=>"form-control"}
+{label profit/}
+{input profit class=>"form-control"}
+{label google/}
+{input google class=>"form-control"}
+{label meta/}
+{input meta class=>"form-control"}
+{label bing/}
+{input bing class=>"form-control"}
+{label sklik/}
+{input sklik class=>"form-control"}
+{label doprava/}
+{input doprava class=>"form-control"}
+{/form}
+</div>
 
-
+	<div n:foreach="$items as $item" class="items">
+		<div class="date">{$item->created_at|date:'F j, Y'}</div>
+		<h2>{$item->marze}</h2>
+		<h2>{$item->profit}</h2>
+		<h2>{$item->google}</h2>
+		<h2>{$item->meta}</h2>
+		<h2>{$item->bing}</h2>
+		<h2>{$item->sklik}</h2>
+		<h2>{$item->doprava}</h2>
+		<h2>{$item->created_at}</h2>
+	</div>
+{/block}

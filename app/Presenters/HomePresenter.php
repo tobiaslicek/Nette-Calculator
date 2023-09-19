@@ -5,32 +5,25 @@ declare(strict_types=1);
 namespace App\Presenters;
 
 use Nette;
+use Nette\Application\UI\Form; //přidáno správně? nebo smazat?
 
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
-// protected function createComponentCalculatorForm()
-// {
-//     $form = new \Nette\Application\UI\Form;
 
-//     $form->addText('marze', 'MARŽE');
-//     $form->addText('profit', 'Hrubý zisk');
-//     $form->addText('reklamy', 'Reklamy');
-//     $form->addText('doprava', 'Doprava');
+public function __construct(
+		private Nette\Database\Explorer $database,
+	) {
+	}
 
-//     $form->addSubmit('submit', 'Vypočítat');
-
-//     $form->onSuccess[] = [$this, 'calculatorFormSucceeded'];
-
-//     return $form;
-// }
-
-// public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
-// {
-//     $marzeValue = $values->profit - ($values->reklamy + $values->doprava);
-//     $form['marze']->setValue($marzeValue);
-// }
-
+public function renderDefault(): void
+{
+	$this->template->items = $this->database
+		->table('values')
+		->order('created_at DESC')
+		->limit(5)->fetchAll();
+}
+    
 protected function createComponentCalculatorForm()
 {
     $form = new \Nette\Application\UI\Form;
@@ -61,24 +54,25 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
  
     $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (float)$values->doprava);
 
+    $this->database->table('values')->insert([
+        'marze' => $marzeValue,
+    ]);
+
     $form['marze']->setValue($marzeValue);
 
     $session = $this->getSession('form');
     $session->formValues = $values;
 
-    // $this->redirect('this');
+    $this->redirect('this');
 }
 
 }
 
 
-/*
 
 
 
 
 
 
-
-*/
 

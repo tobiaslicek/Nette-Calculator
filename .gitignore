@@ -2,4 +2,4 @@ config/local.neon
 vendor
 temp
 log
-composer.log
+composer.lock
