@@ -1,6 +1,6 @@
 {block content}
 <div id="banner">
-    <h1 n:block=title>Srpen</h1>
+    <h1 n:block=title>Kalkulačka marže</h1>
 </div>
 
 <div class="container">
@@ -17,8 +17,25 @@
 {input bing class=>"form-control"}
 {label sklik/}
 {input sklik class=>"form-control"}
-{label doprava/}
-{input doprava class=>"form-control"}
+<div class="carrier">
+    <h5>Zásilkovna</h5>
+        {label z_vydejni/}
+        {input z_vydejni class=>"form-control"}
+        {label z_doruky/}
+        {input z_doruky class=>"form-control"}
+    <h5>Pošta</h5>
+        {label p_vydejni/}
+        {input p_vydejni class=>"form-control"}
+        {label p_doruky/}
+        {input p_doruky class=>"form-control"}
+        {label p_balikovna/}
+        {input p_balikovna class=>"form-control"}
+    <h5>PPL</h5>
+        {label ppl_vydejni/}
+        {input ppl_vydejni class=>"form-control"}
+        {label ppl_doruky/}
+        {input ppl_doruky class=>"form-control"}
+</div>
 <br><br>
 {input submit class=>"form-control"}
 {/form}
@@ -35,7 +52,13 @@
                 <th>Meta</th>
                 <th>Bing</th>
                 <th>Sklik</th>
-                <th>Doprava</th>
+                <th>Zásilkovna Výdejní místo</th>
+                <th>Zásilkovna Výdejní místo</th>
+                <th>Zásilkovna Výdejní místo</th>
+                <th>Zásilkovna Výdejní místo</th>
+                <th>Pošta Výdejní místo</th>
+                <th>PPL Výdejní místo</th>
+
             </tr>
             <tr n:foreach="$items as $item" class="items">
                 <td>{$item->created_at|date:'j.n.Y, 	G:i'} </td>
@@ -45,7 +68,6 @@
                 <td>{$item->meta} Kč</td>
                 <td>{$item->bing} Kč</td>
                 <td>{$item->sklik} Kč</td>
-                <td>{$item->doprava} Kč</td>
             </tr>
         </table>
         <br>

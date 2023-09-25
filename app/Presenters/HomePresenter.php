@@ -34,20 +34,24 @@ protected function createComponentCalculatorForm()
     $form->addText('meta', 'Meta')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
     $form->addText('bing', 'Bing')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
     $form->addText('sklik', 'Sklik')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
-    $form->addText('doprava', 'Doprava')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
-
+    $form->addText('z_vydejni', 'Výdejní místo')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('z_doruky', 'Do ruky')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('p_vydejni', 'Výdejní místo')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('p_doruky', 'Do ruky')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('p_balikovna', 'Balíkovna')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('ppl_vydejni', 'Výdejní místo')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('ppl_doruky', 'Do ruky')->setHtmlAttribute('placeholder', 'Zadejte počet');
     
     $form->addSubmit('submit', 'Vypočítat');
 
     $form->onSuccess[] = [$this, 'calculatorFormSucceeded'];
-
+   
 
     return $form;
 }
 
 public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
 {
-  \Tracy\Debugger::barDump($values);
     $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (float)$values->doprava);
 
     $this->database->table('values')->insert([
@@ -57,10 +61,18 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
         'meta' => $values->meta,
         'bing' => $values->bing,
         'sklik' => $values->sklik,
-        'doprava' => $values->doprava,
+        'z-vydejni' => $values->z_vydejni,
+        'z-doruky' => $values->z_doruky,
+        'p-vydejni' => $values->p_vydejni,
+        'p-doruky' => $values->p_doruky,
+        'p-balikovna' => $values->p_balikovna,
+        'ppl-vydejni' => $values->ppl_vydejni,
+        'ppl-doruky' => $values->ppl_doruky,
         'created_at' =>new \DateTime()
     ]);
 
+
+        
 
     $form['marze']->setValue($marzeValue);
 
