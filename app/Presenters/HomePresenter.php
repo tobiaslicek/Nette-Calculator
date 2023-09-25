@@ -11,6 +11,10 @@ use Nette\Application\UI\Form; //přidáno správně? nebo smazat?
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
 
+public function beforeRender() {
+    $this->template->addFilter('money', fn(float $amount) => (number_format($amount, 2, ",", "&nbsp;")."&nbsp;Kč"));
+}    
+
 public function __construct(
 		private Nette\Database\Explorer $database,
 	) {
@@ -52,7 +56,12 @@ protected function createComponentCalculatorForm()
 
 public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
 {
-    $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (float)$values->doprava);
+    $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik );
+    
+    /* vzrorec
+    2. (((int)$values->z_vydejni * 79)+ ((int)$values->z_doruky * 115) + ((int)$values->p_vydejni * 90) + ((int)$values->p_doruky * 130) + ((int)$values->p_balikovna * 65) + ((int)$values-> ppl_vydejni * 60) + ((int)$values->ppl_doruky * 99))
+ 
+    */
 
     $this->database->table('values')->insert([
         'marze' => $marzeValue,
@@ -61,13 +70,13 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
         'meta' => $values->meta,
         'bing' => $values->bing,
         'sklik' => $values->sklik,
-        'z-vydejni' => $values->z_vydejni,
-        'z-doruky' => $values->z_doruky,
-        'p-vydejni' => $values->p_vydejni,
-        'p-doruky' => $values->p_doruky,
-        'p-balikovna' => $values->p_balikovna,
-        'ppl-vydejni' => $values->ppl_vydejni,
-        'ppl-doruky' => $values->ppl_doruky,
+        'z_vydejni' => $values->z_vydejni,
+        'z_doruky' => $values->z_doruky,
+        'p_vydejni' => $values->p_vydejni,
+        'p_doruky' => $values->p_doruky,
+        'p_balikovna' => $values->p_balikovna,
+        'ppl_vydejni' => $values->ppl_vydejni,
+        'ppl_doruky' => $values->ppl_doruky,
         'created_at' =>new \DateTime()
     ]);
 
