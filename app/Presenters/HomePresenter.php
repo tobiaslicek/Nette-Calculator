@@ -12,7 +12,8 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 {
 
 public function beforeRender() {
-    $this->template->addFilter('money', fn(float $amount) => (number_format($amount, 2, ",", "&nbsp;")."&nbsp;Kč"));
+    $this->template->addFilter('money', fn(?float $amount) => 
+    ($amount ? number_format($amount, 2, ",", "&nbsp;")."&nbsp;Kč" : "-"));
 }    
 
 public function __construct(
@@ -25,7 +26,7 @@ public function renderDefault(): void
 	$this->template->items = $this->database
 		->table('values')
 		->order('created_at DESC')
-		->limit(15)->fetchAll();
+		->limit(95)->fetchAll();
 }
     
 protected function createComponentCalculatorForm()
@@ -56,12 +57,8 @@ protected function createComponentCalculatorForm()
 
 public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
 {
-    $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik );
-    
-    /* vzrorec
-    2. (((int)$values->z_vydejni * 79)+ ((int)$values->z_doruky * 115) + ((int)$values->p_vydejni * 90) + ((int)$values->p_doruky * 130) + ((int)$values->p_balikovna * 65) + ((int)$values-> ppl_vydejni * 60) + ((int)$values->ppl_doruky * 99))
+     $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (((int)$values->z_vydejni * 79)+ ((int)$values->z_doruky * 115) + ((int)$values->p_vydejni * 90) + ((int)$values->p_doruky * 130) + ((int)$values->p_balikovna * 65) + ((int)$values-> ppl_vydejni * 60) + ((int)$values->ppl_doruky * 99)));
  
-    */
 
     $this->database->table('values')->insert([
         'marze' => $marzeValue,
