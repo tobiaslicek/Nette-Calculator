@@ -5,10 +5,13 @@
 
 <div class="container">
 {form calculatorForm}
+<br>
 {label marze/}
 {input marze class=>"form-control"}
+<br>
 {label profit/}
 {input profit class=>"form-control"}
+<br>
 {label google/}
 {input google class=>"form-control"}
 {label meta/}
@@ -18,11 +21,13 @@
 {label sklik/}
 {input sklik class=>"form-control"}
 <div class="carrier">
+        <br>
     <h5>Zásilkovna</h5>
         {label z_vydejni/}
         {input z_vydejni class=>"form-control"}
         {label z_doruky/}
         {input z_doruky class=>"form-control"}
+        <br>
     <h5>Pošta</h5>
         {label p_vydejni/}
         {input p_vydejni class=>"form-control"}
@@ -30,6 +35,7 @@
         {input p_doruky class=>"form-control"}
         {label p_balikovna/}
         {input p_balikovna class=>"form-control"}
+        <br>
     <h5>PPL</h5>
         {label ppl_vydejni/}
         {input ppl_vydejni class=>"form-control"}
@@ -53,11 +59,12 @@
                 <th>Bing</th>
                 <th>Sklik</th>
                 <th>Zásilkovna Výdejní místo</th>
-                <th>Zásilkovna Výdejní místo</th>
-                <th>Zásilkovna Výdejní místo</th>
-                <th>Zásilkovna Výdejní místo</th>
+                <th>Zásilkovna Do ruky</th>
                 <th>Pošta Výdejní místo</th>
+                <th>Pošta Do ruky</th>
+                <th>Balíkovna</th>
                 <th>PPL Výdejní místo</th>
+                <th>PPL Do ruky</th>
 
             </tr>
             <tr n:foreach="$items as $item" class="items">
@@ -68,6 +75,13 @@
                 <td>{$item->meta} Kč</td>
                 <td>{$item->bing} Kč</td>
                 <td>{$item->sklik} Kč</td>
+                <td>{$item->z_vydejni} Ks</td>
+                <td>{$item->z_doruky} Ks</td>
+                <td>{$item->p_vydejni} Ks</td>
+                <td>{$item->p_doruky} Ks</td>
+                <td>{$item->p_balikovna} Ks</td>
+                <td>{$item->ppl_vydejni} Ks</td>
+                <td>{$item->ppl_doruky} Ks</td>
             </tr>
         </table>
         <br>
