@@ -6,22 +6,26 @@
 <div class="container">
 {form calculatorForm}
 <br>
-{label marze/}
+<h3>{label marze/}</h3>
 {input marze class=>"form-control"}
 <br>
-{label profit/}
+<h4>{label profit/}</h4>
 {input profit class=>"form-control"}
 <br>
-{label google/}
-{input google class=>"form-control"}
-{label meta/}
-{input meta class=>"form-control"}
-{label bing/}
-{input bing class=>"form-control"}
-{label sklik/}
-{input sklik class=>"form-control"}
+<div class="ads">
+    <h4>Reklamy</h4>
+    {label google/}
+    {input google class=>"form-control"}
+    {label meta/}
+    {input meta class=>"form-control"}
+    {label bing/}
+    {input bing class=>"form-control"}
+    {label sklik/}
+    {input sklik class=>"form-control"}
+</div>
 <div class="carrier">
-        <br>
+    <br>
+    <h4>Dopravci</h4>
     <h5>Zásilkovna</h5>
         {label z_vydejni/}
         {input z_vydejni class=>"form-control"}
@@ -42,6 +46,9 @@
         {label ppl_doruky/}
         {input ppl_doruky class=>"form-control"}
 </div>
+<br>
+<h4>{label celkem/}</h4>
+{input celkem class=>"form-control"}
 <br><br>
 {input submit class=>"form-control"}
 {/form}
@@ -58,13 +65,14 @@
                 <th>Meta</th>
                 <th>Bing</th>
                 <th>Sklik</th>
-                <th>Zásilkovna Výdejní místo</th>
-                <th>Zásilkovna Do ruky</th>
-                <th>Pošta Výdejní místo</th>
-                <th>Pošta Do ruky</th>
-                <th>Balíkovna</th>
-                <th>PPL Výdejní místo</th>
-                <th>PPL Do ruky</th>
+                <th>Zásilkovna - Výdejní místo</th>
+                <th>Zásilkovna - Do ruky</th>
+                <th>Pošta - Výdejní místo</th>
+                <th>Pošta - Do ruky</th>
+                <th>Pošta - Balíkovna</th>
+                <th>PPL - Výdejní místo</th>
+                <th>PPL - Do ruky</th>
+                <th>Celkem</th>
 
             </tr>
             <tr n:foreach="$items as $item" class="items">
@@ -82,6 +90,7 @@
                 <td>{$item->p_balikovna} Ks</td>
                 <td>{$item->ppl_vydejni} Ks</td>
                 <td>{$item->ppl_doruky} Ks</td>
+                <td>{$item->celkem} Ks</td>
             </tr>
         </table>
         <br>

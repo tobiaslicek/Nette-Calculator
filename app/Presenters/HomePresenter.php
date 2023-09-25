@@ -33,7 +33,7 @@ protected function createComponentCalculatorForm()
 {
     $form = new \Nette\Application\UI\Form;
 
-    $form->addText('marze', 'MARŽE')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
+    $form->addText('marze', 'MARŽE')->setHtmlAttribute('placeholder', 'Toto pole nechte volné');
     $form->addText('profit', 'Hrubý zisk')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
     $form->addText('google', 'Google Ads')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
     $form->addText('meta', 'Meta')->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč');
@@ -46,6 +46,7 @@ protected function createComponentCalculatorForm()
     $form->addText('p_balikovna', 'Balíkovna')->setHtmlAttribute('placeholder', 'Zadejte počet');
     $form->addText('ppl_vydejni', 'Výdejní místo')->setHtmlAttribute('placeholder', 'Zadejte počet');
     $form->addText('ppl_doruky', 'Do ruky')->setHtmlAttribute('placeholder', 'Zadejte počet');
+    $form->addText('celkem', 'Objednávek celkem')->setHtmlAttribute('placeholder', 'Toto pole nechte volné');
     
     $form->addSubmit('submit', 'Vypočítat');
 
@@ -74,6 +75,7 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
         'p_balikovna' => $values->p_balikovna,
         'ppl_vydejni' => $values->ppl_vydejni,
         'ppl_doruky' => $values->ppl_doruky,
+        'celkem' => $values->celkem,
         'created_at' =>new \DateTime()
     ]);
 
