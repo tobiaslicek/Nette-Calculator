@@ -23,12 +23,7 @@ public function __construct(
 		private Nette\Database\Explorer $database,
 	) {
          parent::__construct(); 
-        $this->kontrola = $this->database
-            ->table('values')
-            ->select('*, z_vydejni + z_doruky + p_vydejni + p_doruky + p_balikovna + ppl_vydejni + ppl_doruky AS check_value')
-            ->order('created_at DESC')
-            ->limit(50)
-            ->fetchAll();
+       
 	}
 
 public function renderDefault(): void
@@ -38,7 +33,6 @@ public function renderDefault(): void
         ->select('*, z_vydejni + z_doruky + p_vydejni + p_doruky + p_balikovna + ppl_vydejni + ppl_doruky AS check_value')
 		->order('created_at DESC')
 		->limit(50)->fetchAll();
-\Tracy\Debugger::barDump($kontrola);
 
 	$this->template->items = $kontrola;
 }
@@ -74,6 +68,8 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
 {
      $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (((int)$values->z_vydejni * 79) + ((int)$values->z_doruky * 115) + ((int)$values->p_vydejni * 90) + ((int)$values->p_doruky * 130) + ((int)$values->p_balikovna * 65) + ((int)$values->ppl_vydejni * 60) + ((int)$values->ppl_doruky * 99)));
  
+    $soucet_dopravci = (int)$values->z_vydejni + (int)$values->z_doruky + (int)$values->p_vydejni + (int)$values->p_doruky + (int)$values->p_balikovna + (int)$values->ppl_vydejni + (int)$values->ppl_doruky;
+
 
     $this->database->table('values')->insert([
         'marze' => $marzeValue,
@@ -93,17 +89,9 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
         'created_at' =>new \DateTime()
     ]);
 
-    if($this->kontrola !== $values->celkem) {
-        $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'error');
+    if($soucet_dopravci != $values->celkem) {
+        $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'danger');
     }
-
-// 'error', 'warning', 'info', 
-
-    $form['marze']->setValue($marzeValue);
-
-    $session = $this->getSession('form');
-    $session->formValues = $values;
-
 
     $this->redirect('this');
 }
