@@ -50,7 +50,7 @@ protected function createComponentCalculatorForm()
     $form->addText('p_balikovna', 'Balíkovna')->setHtmlAttribute('placeholder', 'Zadejte počet');
     $form->addText('ppl_vydejni', 'Výdejní místo')->setHtmlAttribute('placeholder', 'Zadejte počet');
     $form->addText('ppl_doruky', 'Do ruky')->setHtmlAttribute('placeholder', 'Zadejte počet');
-    $form->addText('celkem', 'Objednávek celkem')->setHtmlAttribute('placeholder', 'Toto pole nechte volné');
+    $form->addText('celkem', 'Objednávek celkem')->setHtmlAttribute('placeholder', 'Zadejte počet');
     
     $form->addSubmit('submit', 'Vypočítat');
 
