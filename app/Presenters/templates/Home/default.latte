@@ -73,6 +73,7 @@
                 <th>PPL - Výdejní místo</th>
                 <th>PPL - Do ruky</th>
                 <th>Celkem</th>
+                <th>Kontrola</th>
 
             </tr>
             <tr n:foreach="$items as $item" class="items">
@@ -91,6 +92,8 @@
                 <td>{$item->ppl_vydejni} Ks</td>
                 <td>{$item->ppl_doruky} Ks</td>
                 <td>{$item->celkem} Ks</td>
+                <td style="color: {if $item->celkem === $item->check_value}green{else}red{/if};">
+                {$item->check_value} Ks</td>
             </tr>
         </table>
         <br>
