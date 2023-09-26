@@ -21,7 +21,15 @@
 
     {=$flash->message|noescape}
 </div>
-
+<script>
+    function hideFlashMessage() {
+        var flashAlert = document.getElementById('flash-alert');
+        if (flashAlert) {
+            flashAlert.style.display = 'none';
+        }
+    }
+    setTimeout(hideFlashMessage, 6000);
+</script>
 
 	{include content}
 
