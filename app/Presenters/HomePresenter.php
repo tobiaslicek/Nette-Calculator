@@ -6,10 +6,13 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form; 
+use Nette\Database\Table\Selection;
 
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
+
+private array $kontrola;
 
 public function beforeRender() {
     $this->template->addFilter('money', fn(?float $amount) => 
@@ -19,6 +22,13 @@ public function beforeRender() {
 public function __construct(
 		private Nette\Database\Explorer $database,
 	) {
+         parent::__construct(); 
+        $this->kontrola = $this->database
+            ->table('values')
+            ->select('*, z_vydejni + z_doruky + p_vydejni + p_doruky + p_balikovna + ppl_vydejni + ppl_doruky AS check_value')
+            ->order('created_at DESC')
+            ->limit(50)
+            ->fetchAll();
 	}
 
 public function renderDefault(): void
@@ -83,8 +93,11 @@ public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdCl
         'created_at' =>new \DateTime()
     ]);
 
+    if($this->kontrola !== $values->celkem) {
+        $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'error');
+    }
 
-        
+// 'error', 'warning', 'info', 
 
     $form['marze']->setValue($marzeValue);
 
