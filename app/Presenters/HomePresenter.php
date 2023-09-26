@@ -23,10 +23,14 @@ public function __construct(
 
 public function renderDefault(): void
 {
-	$this->template->items = $this->database
+    $kontrola = $this->database
 		->table('values')
+        ->select('*, z_vydejni + z_doruky + p_vydejni + p_doruky + p_balikovna + ppl_vydejni + ppl_doruky AS check_value')
 		->order('created_at DESC')
-		->limit(95)->fetchAll();
+		->limit(50)->fetchAll();
+\Tracy\Debugger::barDump($kontrola);
+
+	$this->template->items = $kontrola;
 }
     
 protected function createComponentCalculatorForm()
@@ -58,7 +62,7 @@ protected function createComponentCalculatorForm()
 
 public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
 {
-     $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (((int)$values->z_vydejni * 79)+ ((int)$values->z_doruky * 115) + ((int)$values->p_vydejni * 90) + ((int)$values->p_doruky * 130) + ((int)$values->p_balikovna * 65) + ((int)$values-> ppl_vydejni * 60) + ((int)$values->ppl_doruky * 99)));
+     $marzeValue = (float)$values->profit - ((float)$values->google + (float)$values->meta + (float)$values->bing + (float)$values->sklik + (((int)$values->z_vydejni * 79) + ((int)$values->z_doruky * 115) + ((int)$values->p_vydejni * 90) + ((int)$values->p_doruky * 130) + ((int)$values->p_balikovna * 65) + ((int)$values->ppl_vydejni * 60) + ((int)$values->ppl_doruky * 99)));
  
 
     $this->database->table('values')->insert([
