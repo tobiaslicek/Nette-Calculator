@@ -84,13 +84,13 @@
                 <td>{$item->meta|money|noescape}</td>
                 <td>{$item->bing|money|noescape}</td>
                 <td>{$item->sklik|money|noescape}</td>
-                <td>{$item->z_vydejni} Ks</td>
-                <td>{$item->z_doruky} Ks</td>
-                <td>{$item->p_vydejni} Ks</td>
-                <td>{$item->p_doruky} Ks</td>
-                <td>{$item->p_balikovna} Ks</td>
-                <td>{$item->ppl_vydejni} Ks</td>
-                <td>{$item->ppl_doruky} Ks</td>
+                <td>{$item->z_vydejni} Ks<br>{$item->z_vydejni * 79|money|noescape}</td>
+                <td>{$item->z_doruky} Ks<br>{$item->z_doruky * 115|money|noescape}</td>
+                <td>{$item->p_vydejni} Ks<br>{$item->p_vydejni * 90|money|noescape}</td>
+                <td>{$item->p_doruky} Ks<br>{$item->p_doruky * 130|money|noescape}</td>
+                <td>{$item->p_balikovna} Ks<br>{$item->p_balikovna * 65|money|noescape}</td>
+                <td>{$item->ppl_vydejni} Ks<br>{$item->ppl_vydejni * 60|money|noescape}</td>
+                <td>{$item->ppl_doruky} Ks<br>{$item->ppl_doruky * 99|money|noescape}</td>
                 <td>{$item->celkem} Ks</td>
                 <td style="color: {if $item->celkem === $item->check_value}green{else}red{/if};">
                 {$item->check_value} Ks</td>
