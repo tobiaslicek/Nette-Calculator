@@ -1,58 +1,89 @@
 {block content}
-<div id="banner">
-    <h1 n:block=title>Kalkulačka marže</h1>
-</div>
-
-<div class="container">
-{form calculatorForm}
-<br>
-<h3>{label profit/}</h3>
-{input profit class=>"form-control"}
-<br>
-<div class="ads">
-    <h4>Reklamy</h4>
-    {label google/}
-    {input google class=>"form-control"}
-    {label meta/}
-    {input meta class=>"form-control"}
-    {label bing/}
-    {input bing class=>"form-control"}
-    {label sklik/}
-    {input sklik class=>"form-control"}
-</div>
-<div class="carrier">
-    <br>
-    <h4>Dopravci</h4>
-    <h5>Zásilkovna</h5>
-        {label z_vydejni/}
-        {input z_vydejni class=>"form-control"}
-        {label z_doruky/}
-        {input z_doruky class=>"form-control"}
-        <br>
-    <h5>Pošta</h5>
-        {label p_vydejni/}
-        {input p_vydejni class=>"form-control"}
-        {label p_doruky/}
-        {input p_doruky class=>"form-control"}
-        {label p_balikovna/}
-        {input p_balikovna class=>"form-control"}
-        <br>
-    <h5>PPL</h5>
-        {label ppl_vydejni/}
-        {input ppl_vydejni class=>"form-control"}
-        {label ppl_doruky/}
-        {input ppl_doruky class=>"form-control"}
-</div>
-<br>
-<h4>{label celkem/}</h4>
-{input celkem class=>"form-control"}
-<br><br>
-{input submit class=>"form-control"}
-{/form}
-<br><br><br>
-</div>
-
-	<div>
+    <div id="banner">
+        <h1 n:block=title>Kalkulačka marže</h1>
+    </div>
+    {form calculatorForm}
+        <div class="container text-start">
+            <div class="row align-items-start mt-2">
+                <div class="col-md-6">
+                    <h3>{label profit/}</h3>
+                    {input profit class=>"form-control"}
+                </div>
+                <div class="col-md-6">
+                    <h4>{label celkem/}</h4>
+                    {input celkem class=>"form-control"}
+                </div>
+            </div>
+            <div class="row align-items-start mt-2">
+                <div class="col-md-3">
+                    {label google/}
+                    {input google class=>"form-control"}
+                </div>
+                <div class="col-md-3">
+                    {label meta/}
+                    {input meta class=>"form-control"}
+                </div>
+                <div class="col-md-3">
+                    {label bing/}
+                    {input bing class=>"form-control"}
+                </div>
+                <div class="col-md-3">
+                    {label sklik/}
+                    {input sklik class=>"form-control"}
+                </div>
+            </div>
+            <div class="row align-items-start mt-2">
+                <div class="col-md-6">
+                    <div class="row">
+                    <h3>Zásilkovna</h3>
+                        <div class="col-md-6">
+                            {label z_vydejni/}
+                            {input z_vydejni class=>"form-control"}
+                        </div>
+                        <div class="col-md-6">
+                            {label z_doruky/}
+                            {input z_doruky class=>"form-control"}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <h3>PPL</h3>
+                        <div class="col-md-6">
+                            {label ppl_vydejni/}
+                            {input ppl_vydejni class=>"form-control"}
+                        </div>
+                        <div class="col-md-6">
+                            {label ppl_doruky/}
+                            {input ppl_doruky class=>"form-control"}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-start mt-2">
+            <h3>Pošta</h3>
+                <div class="col-md-4">
+                    {label p_vydejni/}
+                    {input p_vydejni class=>"form-control"}
+                </div>
+                <div class="col-md-4">
+                    {label p_doruky/}
+                    {input p_doruky class=>"form-control"}
+                </div>
+                <div class="col-md-4">
+                    {label p_balikovna/}
+                    {input p_balikovna class=>"form-control"}
+                </div>
+            </div>
+            <div class="row align-items-start mt-2">
+                <div class="col">
+                    <h3>{label submit/}</h3>
+                    {input submit class=>"form-control"}
+                </div>
+            </div>
+        </div>
+    {/form}
+    <div class="mt-5">
         <table class="table">
             <tr>
                 <th>Datum</th>
@@ -71,10 +102,9 @@
                 <th>PPL - Do ruky</th>
                 <th>Celkem</th>
                 <th>Kontrola</th>
-
             </tr>
             <tr n:foreach="$items as $item" class="items">
-                <td>{$item->created_at|date:'j.n.Y, 	G:i'} </td>
+                <td>{$item->created_at|date:'j.n.Y, G:i'}</td>
                 <td>{$item->marze|money|noescape}</td>
                 <td>{$item->profit|money|noescape}</td>
                 <td>{$item->google|money|noescape}</td>
@@ -90,10 +120,10 @@
                 <td>{$item->ppl_doruky} Ks<br>{$item->ppl_doruky * 99|money|noescape}</td>
                 <td>{$item->celkem} Ks</td>
                 <td style="color: {if $item->celkem === $item->check_value}green{else}red{/if};">
-                {$item->check_value} Ks</td>
+                    {$item->check_value} Ks
+                </td>
             </tr>
         </table>
         <br>
-	</div>
-
+    </div>
 {/block}
