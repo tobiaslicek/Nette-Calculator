@@ -103,7 +103,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
                     + ((int)$values->ppl_pickup_point * 60)
                     + ((int)$values->ppl_hand_delivery * 99)));
 
-        $soucet_dopravci = (int)$values->zasilkovna_pickup_point + (int)$values->zasilkovna_hand_delivery + (int)$values->posta_pickup_point + (int)$values->posta_hand_delivery + (int)$values->posta_balikovna + (int)$values->ppl_pickup_point + (int)$values->ppl_hand_delivery;
+        $carriers_total = (int)$values->zasilkovna_pickup_point + (int)$values->zasilkovna_hand_delivery + (int)$values->posta_pickup_point + (int)$values->posta_hand_delivery + (int)$values->posta_balikovna + (int)$values->ppl_pickup_point + (int)$values->ppl_hand_delivery;
 
         $this->database->table('values')->insert([
             'margin' => $marginValue,
@@ -123,7 +123,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
             'created_at' => new \DateTime()
         ]);
 
-        if ($soucet_dopravci != $values->total) {
+        if ($carriers_total != $values->total) {
             $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'danger');
         }
 
