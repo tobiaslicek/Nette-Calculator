@@ -12,7 +12,7 @@ use Nette\Database\Table\Selection;
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
 
-    private array $kontrola;
+    private array $control;
 
     public function beforeRender()
     {
@@ -28,13 +28,13 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault(): void
     {
-        $kontrola = $this->database
+        $control = $this->database
             ->table('values')
-            ->select('*, z_vydejni + z_doruky + p_vydejni + p_doruky + p_balikovna + ppl_vydejni + ppl_doruky AS check_value')
+            ->select('*, zasilkovna_pickup_point + zasilkovna_hand_delivery + posta_pickup_point + posta_hand_delivery + posta_balikovna + ppl_pickup_point + ppl_hand_delivery AS check_value')
             ->order('created_at DESC')
             ->limit(50)->fetchAll();
 
-        $this->template->items = $kontrola;
+        $this->template->items = $control;
     }
 
     protected function createComponentCalculatorForm()
@@ -56,28 +56,28 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         $form->addText('sklik', 'Sklik')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
             ->setNullable();
-        $form->addText('z_vydejni', 'Výdejní místo')
+        $form->addText('zasilkovna_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('z_doruky', 'Do ruky')
+        $form->addText('zasilkovna_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('p_vydejni', 'Výdejní místo')
+        $form->addText('posta_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('p_doruky', 'Do ruky')
+        $form->addText('posta_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('p_balikovna', 'Balíkovna')
+        $form->addText('posta_balikovna', 'Balíkovna')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('ppl_vydejni', 'Výdejní místo')
+        $form->addText('ppl_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('ppl_doruky', 'Do ruky')
+        $form->addText('ppl_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
-        $form->addText('celkem', 'Objednávek celkem')
+        $form->addText('total', 'Objednávek celkem')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setRequired('Prosím, vyplňte pole "Objednávek celkem"');
 
@@ -90,40 +90,40 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
     public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
     {
-        $marzeValue = (float)$values->profit
+        $marginValue = (float)$values->profit
             - ((float)$values->google
                 + (float)$values->meta
                 + (float)$values->bing
                 + (float)$values->sklik
-                + (((int)$values->z_vydejni * 79)
-                    + ((int)$values->z_doruky * 115)
-                    + ((int)$values->p_vydejni * 90)
-                    + ((int)$values->p_doruky * 130)
-                    + ((int)$values->p_balikovna * 65)
-                    + ((int)$values->ppl_vydejni * 60)
-                    + ((int)$values->ppl_doruky * 99)));
+                + (((int)$values->zasilkovna_pickup_point * 79)
+                    + ((int)$values->zasilkovna_hand_delivery * 115)
+                    + ((int)$values->posta_pickup_point * 90)
+                    + ((int)$values->posta_hand_delivery * 130)
+                    + ((int)$values->posta_balikovna * 65)
+                    + ((int)$values->ppl_pickup_point * 60)
+                    + ((int)$values->ppl_hand_delivery * 99)));
 
-        $soucet_dopravci = (int)$values->z_vydejni + (int)$values->z_doruky + (int)$values->p_vydejni + (int)$values->p_doruky + (int)$values->p_balikovna + (int)$values->ppl_vydejni + (int)$values->ppl_doruky;
+        $soucet_dopravci = (int)$values->zasilkovna_pickup_point + (int)$values->zasilkovna_hand_delivery + (int)$values->posta_pickup_point + (int)$values->posta_hand_delivery + (int)$values->posta_balikovna + (int)$values->ppl_pickup_point + (int)$values->ppl_hand_delivery;
 
         $this->database->table('values')->insert([
-            'marze' => $marzeValue,
+            'margin' => $marginValue,
             'profit' => $values->profit,
             'google' => $values->google,
             'meta' => $values->meta,
             'bing' => $values->bing,
             'sklik' => $values->sklik,
-            'z_vydejni' => $values->z_vydejni,
-            'z_doruky' => $values->z_doruky,
-            'p_vydejni' => $values->p_vydejni,
-            'p_doruky' => $values->p_doruky,
-            'p_balikovna' => $values->p_balikovna,
-            'ppl_vydejni' => $values->ppl_vydejni,
-            'ppl_doruky' => $values->ppl_doruky,
-            'celkem' => $values->celkem,
+            'zasilkovna_pickup_point' => $values->zasilkovna_pickup_point,
+            'zasilkovna_hand_delivery' => $values->zasilkovna_hand_delivery,
+            'posta_pickup_point' => $values->posta_pickup_point,
+            'posta_hand_delivery' => $values->posta_hand_delivery,
+            'posta_balikovna' => $values->posta_balikovna,
+            'ppl_pickup_point' => $values->ppl_pickup_point,
+            'ppl_hand_delivery' => $values->ppl_hand_delivery,
+            'total' => $values->total,
             'created_at' => new \DateTime()
         ]);
 
-        if ($soucet_dopravci != $values->celkem) {
+        if ($soucet_dopravci != $values->total) {
             $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'danger');
         }
 

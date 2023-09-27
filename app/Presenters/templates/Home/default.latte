@@ -10,8 +10,8 @@
                     {input profit class=>"form-control"}
                 </div>
                 <div class="col-md-6">
-                    <h4>{label celkem/}</h4>
-                    {input celkem class=>"form-control"}
+                    <h4>{label total/}</h4>
+                    {input total class=>"form-control"}
                 </div>
             </div>
             <div class="row align-items-start mt-2">
@@ -37,12 +37,12 @@
                     <div class="row">
                     <h3>Zásilkovna</h3>
                         <div class="col-md-6">
-                            {label z_vydejni/}
-                            {input z_vydejni class=>"form-control"}
+                            {label zasilkovna_pickup_point/}
+                            {input zasilkovna_pickup_point class=>"form-control"}
                         </div>
                         <div class="col-md-6">
-                            {label z_doruky/}
-                            {input z_doruky class=>"form-control"}
+                            {label zasilkovna_hand_delivery/}
+                            {input zasilkovna_hand_delivery class=>"form-control"}
                         </div>
                     </div>
                 </div>
@@ -50,12 +50,12 @@
                     <div class="row">
                         <h3>PPL</h3>
                         <div class="col-md-6">
-                            {label ppl_vydejni/}
-                            {input ppl_vydejni class=>"form-control"}
+                            {label ppl_pickup_point/}
+                            {input ppl_pickup_point class=>"form-control"}
                         </div>
                         <div class="col-md-6">
-                            {label ppl_doruky/}
-                            {input ppl_doruky class=>"form-control"}
+                            {label ppl_hand_delivery/}
+                            {input ppl_hand_delivery class=>"form-control"}
                         </div>
                     </div>
                 </div>
@@ -63,16 +63,16 @@
             <div class="row align-items-start mt-2">
             <h3>Pošta</h3>
                 <div class="col-md-4">
-                    {label p_vydejni/}
-                    {input p_vydejni class=>"form-control"}
+                    {label posta_pickup_point/}
+                    {input posta_pickup_point class=>"form-control"}
                 </div>
                 <div class="col-md-4">
-                    {label p_doruky/}
-                    {input p_doruky class=>"form-control"}
+                    {label posta_hand_delivery/}
+                    {input posta_hand_delivery class=>"form-control"}
                 </div>
                 <div class="col-md-4">
-                    {label p_balikovna/}
-                    {input p_balikovna class=>"form-control"}
+                    {label posta_balikovna/}
+                    {input posta_balikovna class=>"form-control"}
                 </div>
             </div>
             <div class="row align-items-start mt-4">
@@ -105,21 +105,21 @@
             </tr>
             <tr n:foreach="$items as $item" class="items">
                 <td>{$item->created_at|date:'j.n.Y, G:i'}</td>
-                <td>{$item->marze|money|noescape}</td>
+                <td>{$item->margin|money|noescape}</td>
                 <td>{$item->profit|money|noescape}</td>
                 <td>{$item->google|money|noescape}</td>
                 <td>{$item->meta|money|noescape}</td>
                 <td>{$item->bing|money|noescape}</td>
                 <td>{$item->sklik|money|noescape}</td>
-                <td>{$item->z_vydejni} Ks<br>{$item->z_vydejni * 79|money|noescape}</td>
-                <td>{$item->z_doruky} Ks<br>{$item->z_doruky * 115|money|noescape}</td>
-                <td>{$item->p_vydejni} Ks<br>{$item->p_vydejni * 90|money|noescape}</td>
-                <td>{$item->p_doruky} Ks<br>{$item->p_doruky * 130|money|noescape}</td>
-                <td>{$item->p_balikovna} Ks<br>{$item->p_balikovna * 65|money|noescape}</td>
-                <td>{$item->ppl_vydejni} Ks<br>{$item->ppl_vydejni * 60|money|noescape}</td>
-                <td>{$item->ppl_doruky} Ks<br>{$item->ppl_doruky * 99|money|noescape}</td>
-                <td>{$item->celkem} Ks</td>
-                <td style="color: {if $item->celkem === $item->check_value}green{else}red{/if};">
+                <td>{$item->zasilkovna_pickup_point} Ks<br>{$item->zasilkovna_pickup_point * 79|money|noescape}</td>
+                <td>{$item->zasilkovna_hand_delivery} Ks<br>{$item->zasilkovna_hand_delivery * 115|money|noescape}</td>
+                <td>{$item->posta_pickup_point} Ks<br>{$item->posta_pickup_point * 90|money|noescape}</td>
+                <td>{$item->posta_hand_delivery} Ks<br>{$item->posta_hand_delivery * 130|money|noescape}</td>
+                <td>{$item->posta_balikovna} Ks<br>{$item->posta_balikovna * 65|money|noescape}</td>
+                <td>{$item->ppl_pickup_point} Ks<br>{$item->ppl_pickup_point * 60|money|noescape}</td>
+                <td>{$item->ppl_hand_delivery} Ks<br>{$item->ppl_hand_delivery * 99|money|noescape}</td>
+                <td>{$item->total} Ks</td>
+                <td style="color: {if $item->total === $item->check_value}green{else}red{/if};">
                     {$item->check_value} Ks
                 </td>
             </tr>
