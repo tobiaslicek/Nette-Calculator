@@ -111,13 +111,20 @@
                 <td>{$item->meta|money|noescape}</td>
                 <td>{$item->bing|money|noescape}</td>
                 <td>{$item->sklik|money|noescape}</td>
-                <td>{$item->zasilkovna_pickup_point} Ks<br>{$item->zasilkovna_pickup_point * 79|money|noescape}</td>
-                <td>{$item->zasilkovna_hand_delivery} Ks<br>{$item->zasilkovna_hand_delivery * 115|money|noescape}</td>
-                <td>{$item->posta_pickup_point} Ks<br>{$item->posta_pickup_point * 90|money|noescape}</td>
-                <td>{$item->posta_hand_delivery} Ks<br>{$item->posta_hand_delivery * 130|money|noescape}</td>
-                <td>{$item->posta_balikovna} Ks<br>{$item->posta_balikovna * 65|money|noescape}</td>
-                <td>{$item->ppl_pickup_point} Ks<br>{$item->ppl_pickup_point * 60|money|noescape}</td>
-                <td>{$item->ppl_hand_delivery} Ks<br>{$item->ppl_hand_delivery * 99|money|noescape}</td>
+                <td>{$item->zasilkovna_pickup_point * 79|money|noescape}<br>     
+                    {$item->zasilkovna_pickup_point} Ks</td>
+                <td>{$item->zasilkovna_hand_delivery * 115|money|noescape}<br>               
+                    {$item->zasilkovna_hand_delivery} Ks</td>
+                <td>{$item->posta_pickup_point * 90|money|noescape}<br>
+                    {$item->posta_pickup_point} Ks</td>
+                <td>{$item->posta_hand_delivery * 130|money|noescape}<br>
+                    {$item->posta_hand_delivery} Ks</td>
+                <td>{$item->posta_balikovna * 65|money|noescape}<br>
+                    {$item->posta_balikovna} Ks</td>
+                <td>{$item->ppl_pickup_point * 60|money|noescape}<br>
+                    {$item->ppl_pickup_point} Ks</td>
+                <td>{$item->ppl_hand_delivery * 99|money|noescape}<br>
+                    {$item->ppl_hand_delivery} Ks</td>
                 <td>{$item->total} Ks</td>
                 <td style="color: {if $item->total === $item->check_value}green{else}red{/if};">
                     {$item->check_value} Ks
