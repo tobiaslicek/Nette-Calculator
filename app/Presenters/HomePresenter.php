@@ -103,7 +103,13 @@ final class HomePresenter extends Nette\Application\UI\Presenter
                     + ((int)$values->ppl_pickup_point * 60)
                     + ((int)$values->ppl_hand_delivery * 99)));
 
-        $carriers_total = (int)$values->zasilkovna_pickup_point + (int)$values->zasilkovna_hand_delivery + (int)$values->posta_pickup_point + (int)$values->posta_hand_delivery + (int)$values->posta_balikovna + (int)$values->ppl_pickup_point + (int)$values->ppl_hand_delivery;
+        $carriers_total = (int)$values->zasilkovna_pickup_point
+            + (int)$values->zasilkovna_hand_delivery
+            + (int)$values->posta_pickup_point
+            + (int)$values->posta_hand_delivery
+            + (int)$values->posta_balikovna
+            + (int)$values->ppl_pickup_point
+            + (int)$values->ppl_hand_delivery;
 
         $this->database->table('values')->insert([
             'margin' => $marginValue,
