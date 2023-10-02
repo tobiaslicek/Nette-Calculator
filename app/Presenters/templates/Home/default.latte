@@ -126,7 +126,7 @@
                 <td>{$item->ppl_hand_delivery * 99|money|noescape}<br>
                     {$item->ppl_hand_delivery} Ks</td>
                 <td>{$item->total} Ks</td>
-                <td style="color: {if $item->total === $item->check_value}green{else}red{/if};">
+                <td class="{if $item->total === $item->check_value}text-success{else}text-danger{/if}">
                     {$item->check_value} Ks
                 </td>
             </tr>
