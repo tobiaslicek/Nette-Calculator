@@ -46,48 +46,37 @@ final class HomePresenter extends Nette\Application\UI\Presenter
             ->setRequired('Prosím, vyplňte pole "Hrubý zisk".');
         $form->addText('google', 'Google Ads')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('meta', 'Meta')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('bing', 'Bing')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('sklik', 'Sklik')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('zasilkovna_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('zasilkovna_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('posta_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('posta_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('posta_balikovna', 'Balíkovna')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('ppl_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('ppl_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable()
-            ->setDefaultValue(0);
+            ->setNullable();
         $form->addText('total', 'Objednávek celkem')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setRequired('Prosím, vyplňte pole "Objednávek celkem"');
@@ -101,26 +90,30 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
     public function calculatorFormSucceeded(\Nette\Application\UI\Form $form, \stdClass $values)
     {
-        $marginValue = (float)$values->profit
-            - ((float)$values->google
-                + (float)$values->meta
-                + (float)$values->bing
-                + (float)$values->sklik
-                + (((int)$values->zasilkovna_pickup_point * 79)
-                    + ((int)$values->zasilkovna_hand_delivery * 115)
-                    + ((int)$values->posta_pickup_point * 90)
-                    + ((int)$values->posta_hand_delivery * 130)
-                    + ((int)$values->posta_balikovna * 65)
-                    + ((int)$values->ppl_pickup_point * 60)
-                    + ((int)$values->ppl_hand_delivery * 99)));
+        foreach ($values as $key => $value) {
+            $values->$key = $value ?? 0;
+        }
 
-        $carriers_total = (int)$values->zasilkovna_pickup_point
-            + (int)$values->zasilkovna_hand_delivery
-            + (int)$values->posta_pickup_point
-            + (int)$values->posta_hand_delivery
-            + (int)$values->posta_balikovna
-            + (int)$values->ppl_pickup_point
-            + (int)$values->ppl_hand_delivery;
+        $marginValue = (float)$values->profit
+            - (((float)($values->google ?? 0))
+                + ((float)($values->meta ?? 0))
+                + ((float)($values->bing ?? 0))
+                + ((float)($values->sklik ?? 0))
+                + (((int)($values->zasilkovna_pickup_point ?? 0) * 79)
+                    + ((int)($values->zasilkovna_hand_delivery ?? 0) * 115)
+                    + ((int)($values->posta_pickup_point ?? 0) * 90)
+                    + ((int)($values->posta_hand_delivery ?? 0) * 130)
+                    + ((int)($values->posta_balikovna ?? 0) * 65)
+                    + ((int)($values->ppl_pickup_point ?? 0) * 60)
+                    + ((int)($values->ppl_hand_delivery ?? 0) * 99)));
+
+        $carriers_total = ((int)($values->zasilkovna_pickup_point ?? 0))
+            + ((int)($values->zasilkovna_hand_delivery ?? 0))
+            + ((int)($values->posta_pickup_point ?? 0))
+            + ((int)($values->posta_hand_delivery ?? 0))
+            + ((int)($values->posta_balikovna ?? 0))
+            + ((int)($values->ppl_pickup_point ?? 0))
+            + ((int)($values->ppl_hand_delivery ?? 0));
 
 
         if ($carriers_total != $values->total) {
@@ -128,19 +121,19 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         }
 
         $this->database->table('values')->insert([
-            'margin' => $marginValue,
-            'profit' => $values->profit,
-            'google' => $values->google,
-            'meta' => $values->meta,
-            'bing' => $values->bing,
-            'sklik' => $values->sklik,
-            'zasilkovna_pickup_point' => $values->zasilkovna_pickup_point,
-            'zasilkovna_hand_delivery' => $values->zasilkovna_hand_delivery,
-            'posta_pickup_point' => $values->posta_pickup_point,
-            'posta_hand_delivery' => $values->posta_hand_delivery,
-            'posta_balikovna' => $values->posta_balikovna,
-            'ppl_pickup_point' => $values->ppl_pickup_point,
-            'ppl_hand_delivery' => $values->ppl_hand_delivery,
+            'margin' => $marginValue ?? 0,
+            'profit' => $values->profit ?? 0,
+            'google' => $values->google ?? 0,
+            'meta' => $values->meta ?? 0,
+            'bing' => $values->bing ?? 0,
+            'sklik' => $values->sklik ?? 0,
+            'zasilkovna_pickup_point' => $values->zasilkovna_pickup_point ?? 0,
+            'zasilkovna_hand_delivery' => $values->zasilkovna_hand_delivery ?? 0,
+            'posta_pickup_point' => $values->posta_pickup_point ?? 0,
+            'posta_hand_delivery' => $values->posta_hand_delivery ?? 0,
+            'posta_balikovna' => $values->posta_balikovna ?? 0,
+            'ppl_pickup_point' => $values->ppl_pickup_point ?? 0,
+            'ppl_hand_delivery' => $values->ppl_hand_delivery ?? 0,
             'total' => $values->total,
             'created_at' => new \DateTime()
         ]);
