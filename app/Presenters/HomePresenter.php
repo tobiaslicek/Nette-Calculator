@@ -46,37 +46,48 @@ final class HomePresenter extends Nette\Application\UI\Presenter
             ->setRequired('Prosím, vyplňte pole "Hrubý zisk".');
         $form->addText('google', 'Google Ads')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('meta', 'Meta')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('bing', 'Bing')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('sklik', 'Sklik')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('zasilkovna_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('zasilkovna_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('posta_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('posta_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('posta_balikovna', 'Balíkovna')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('ppl_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('ppl_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->setDefaultValue(0);
         $form->addText('total', 'Objednávek celkem')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setRequired('Prosím, vyplňte pole "Objednávek celkem"');
@@ -111,6 +122,11 @@ final class HomePresenter extends Nette\Application\UI\Presenter
             + (int)$values->ppl_pickup_point
             + (int)$values->ppl_hand_delivery;
 
+
+        if ($carriers_total != $values->total) {
+            $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'danger');
+        }
+
         $this->database->table('values')->insert([
             'margin' => $marginValue,
             'profit' => $values->profit,
@@ -128,10 +144,6 @@ final class HomePresenter extends Nette\Application\UI\Presenter
             'total' => $values->total,
             'created_at' => new \DateTime()
         ]);
-
-        if ($carriers_total != $values->total) {
-            $this->flashMessage('Zadaný počet objednávek celkem je rozdílný od kontrolního součtu', 'danger');
-        }
 
         $this->redirect('this');
     }
