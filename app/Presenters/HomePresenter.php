@@ -41,45 +41,61 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     {
         $form = new \Nette\Application\UI\Form;
 
+        // ->addRule($form::FLOAT, 'Hrubý zisk musí být platné číslo.');
+        // ->addRule($form::INTEGER, 'Počet musí být celé číslo.')
+        // ->addRule($form::MIN, 'Počet musí být alespoň 0.', 0);
+
         $form->addText('profit', 'Hrubý zisk')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setRequired('Prosím, vyplňte pole "Hrubý zisk".');
+            ->setRequired('Prosím, vyplňte pole "Hrubý zisk".')
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('google', 'Google Ads')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('meta', 'Meta')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('bing', 'Bing')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('sklik', 'Sklik')
             ->setHtmlAttribute('placeholder', 'Zadejte hodnotu v Kč')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('zasilkovna_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('zasilkovna_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
             ->setNullable();
         $form->addText('posta_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('posta_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('posta_balikovna', 'Balíkovna')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('ppl_pickup_point', 'Výdejní místo')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('ppl_hand_delivery', 'Do ruky')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setNullable();
+            ->setNullable()
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
         $form->addText('total', 'Objednávek celkem')
             ->setHtmlAttribute('placeholder', 'Zadejte počet')
-            ->setRequired('Prosím, vyplňte pole "Objednávek celkem"');
+            ->setRequired('Prosím, vyplňte pole "Objednávek celkem"')
+            ->addRule($form::FLOAT, 'Hodnota musí být platné číslo');
 
         $form->addSubmit('submit', 'Vypočítat');
 
